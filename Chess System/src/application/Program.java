@@ -1,22 +1,15 @@
-/**
- * 
- */
 package application;
 
 import java.util.Locale;
 import java.util.Scanner;
 
-import boardgame.Position;
+import chess.ChessMatch;
 
 /**
  * @author vlucisil
- *
  */
 public class Program {
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
 		
 		Locale.setDefault(Locale.US);
@@ -28,12 +21,18 @@ public class Program {
 		System.out.println("______________________________________ JOGO DE XADREZ _____________________________________________");
 		System.out.println();
 		System.out.println("***************************************************************************************************");
-		System.out.printf("Nome Competidor 1 : ");
-		String c1 = sc.nextLine();
-		System.out.printf("Nome Competidor 2 : ");
-		String c2 = sc.nextLine();
+		System.out.printf("Nome jogador 1 : ");
+		String j1 = sc.nextLine();
+		System.out.printf("Nome jogador 2 : ");
+		String j2 = sc.nextLine();
 		System.out.println();		
-		System.out.println("Sejam bem vindos ao Jogo " + c1 + " e " + c2 + ", " + "sejam hosnestos e não trapassem !!!!");
+		System.out.println("Sejam bem vindos ao Jogo " + j1 + " e " + j2 + ", " + "sejam hosnestos e não trapassem !!!!");
+		System.out.println();
+		System.out.println();
+				
+		ChessMatch chessMatch = new ChessMatch();
+		UI.printBoard(chessMatch.getPieces());
+		
 		
 		sc.close();
 	}

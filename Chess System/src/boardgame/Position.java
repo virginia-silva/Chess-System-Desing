@@ -1,11 +1,7 @@
-/**
- * 
- */
 package boardgame;
 
 /**
  * @author vlucisil
- *
  */
 public class Position {
 
