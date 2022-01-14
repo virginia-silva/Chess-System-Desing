@@ -20,3 +20,7 @@ Contribuições são sempre bem-vindas! Para contribuir lembre-se sempre de adic
 ## Licença
 
 Não se aplica.
+
+<div align - "center">
+<img src = "<img width="954" alt="Sem título" src="https://user-images.githubusercontent.com/73603060/149559332-f1fd90ed-c0fa-41bc-b975-f9773c48bf14.png"/>
+</div>
