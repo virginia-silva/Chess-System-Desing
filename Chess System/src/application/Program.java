@@ -1,40 +1,64 @@
 package application;
 
-import java.util.Locale;
+import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
+import chess.ChessException;
 import chess.ChessMatch;
+import chess.ChessPiece;
+import chess.ChessPosition;
 
-/**
- * @author vlucisil
- */
 public class Program {
 
 	public static void main(String[] args) {
 		
-		Locale.setDefault(Locale.US);
 		Scanner sc = new Scanner(System.in);
-		
-		System.out.println("                                  Criado por Virginia Silva !!!                                   ");
-		System.out.println();		
-		System.out.println("***************************************************************************************************");
-		System.out.println("______________________________________ JOGO DE XADREZ _____________________________________________");
-		System.out.println();
-		System.out.println("***************************************************************************************************");
-		System.out.printf("Nome jogador 1 : ");
-		String j1 = sc.nextLine();
-		System.out.printf("Nome jogador 2 : ");
-		String j2 = sc.nextLine();
-		System.out.println();		
-		System.out.println("Sejam bem vindos ao Jogo " + j1 + " e " + j2 + ", " + "sejam hosnestos e não trapassem !!!!");
-		System.out.println();
-		System.out.println();
-				
 		ChessMatch chessMatch = new ChessMatch();
-		UI.printBoard(chessMatch.getPieces());
+		List<ChessPiece> captured = new ArrayList<>();
 		
-		
-		sc.close();
+		while (!chessMatch.getCheckMate()) {
+			try {
+				UI.clearScreen();
+				UI.printMatch(chessMatch, captured);
+				System.out.println();
+				System.out.print("Source: ");
+				ChessPosition source = UI.readChessPosition(sc);
+				
+				boolean[][] possibleMoves = chessMatch.possibleMoves(source);
+				UI.clearScreen();
+				UI.printBoard(chessMatch.getPieces(), possibleMoves);
+				System.out.println();
+				System.out.print("Target: ");
+				ChessPosition target = UI.readChessPosition(sc);
+				
+				ChessPiece capturedPiece = chessMatch.performChessMove(source, target);
+				
+				if (capturedPiece != null) {
+					captured.add(capturedPiece);
+				}
+				
+				if (chessMatch.getPromoted() != null) {
+					System.out.print("Enter piece for promotion (B/N/R/Q): ");
+					String type = sc.nextLine().toUpperCase();
+					while (!type.equals("B") && !type.equals("N") && !type.equals("R") & !type.equals("Q")) {
+						System.out.print("Invalid value! Enter piece for promotion (B/N/R/Q): ");
+						type = sc.nextLine().toUpperCase();
+					}
+					chessMatch.replacePromotedPiece(type);
+				}
+			}
+			catch (ChessException e) {
+				System.out.println(e.getMessage());
+				sc.nextLine();
+			}
+			catch (InputMismatchException e) {
+				System.out.println(e.getMessage());
+				sc.nextLine();
+			}
+		}
+		UI.clearScreen();
+		UI.printMatch(chessMatch, captured);
 	}
-
 }
