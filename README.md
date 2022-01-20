@@ -19,7 +19,7 @@ Para iniciar o desenvolvimento, é necessário clonar o projeto do GitHub num di
 cd "diretorio de sua preferencia"
 git clone https://github.com/virginia-silva/Chess-System-Desing.git
 ```
-> Status do Projeto: Em desenvolvimento :warning:
+> Status do Projeto: Finalizado 😲:
 
 ## Contribuições
 
